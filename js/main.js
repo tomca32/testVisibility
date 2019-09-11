@@ -5,4 +5,18 @@ document.addEventListener("visibilitychange", function() {
 	var text = document.createTextNode(s);
 	node.appendChild(text);
 	document.getElementById('content').appendChild(node);
+	fetchIt();
 });
+
+
+function fetchIt() {
+	fetch('/stupid', {
+      method: 'POST',
+      keepalive: true,
+      mode: 'same-origin',
+      body: JSON.stringify({
+      	number: 42
+      }),
+    });
+}
+
