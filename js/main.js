@@ -5,12 +5,17 @@ document.addEventListener("visibilitychange", function() {
 	var text = document.createTextNode(s);
 	node.appendChild(text);
 	document.getElementById('content').appendChild(node);
-	fetchIt();
+	fetchVisibilityChange();
+});
+
+window.addEventListener('beforeunload', function(e) {
+	console.log('BEFORE UNLOAD FIRED');
+	fetchUnload();
 });
 
 
-function fetchIt() {
-	fetch('/stupid', {
+function fetchVisibilityChange() {
+	fetch('/visibility_change_fetch', {
       method: 'POST',
       keepalive: true,
       mode: 'same-origin',
@@ -20,3 +25,13 @@ function fetchIt() {
     });
 }
 
+function fetchUnload() {
+	fetch('/unload_fetch', {
+      method: 'POST',
+      keepalive: true,
+      mode: 'same-origin',
+      body: JSON.stringify({
+      	number: 42
+      }),
+    });
+}
