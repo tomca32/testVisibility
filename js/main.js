@@ -5,7 +5,10 @@ document.addEventListener("visibilitychange", function() {
 	var text = document.createTextNode(s);
 	node.appendChild(text);
 	document.getElementById('content').appendChild(node);
-	fetchVisibilityChange();
+	if (document.visibilityState === 'hidden') {
+		saveToStorage(s);
+		fetchVisibilityChange();
+	}
 });
 
 window.addEventListener('beforeunload', function(e) {
@@ -34,4 +37,8 @@ function fetchUnload() {
       	number: 42
       }),
     });
+}
+
+function saveToStorage(s) {
+	localStorage.setItem('time', s);
 }
