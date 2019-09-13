@@ -6,6 +6,7 @@ document.addEventListener("visibilitychange", function() {
 	node.appendChild(text);
 	document.getElementById('content').appendChild(node);
 	if (document.visibilityState === 'hidden') {
+		saveToStorage(s);
 		fetchVisibilityChange();
 	}
 });
